@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hDM-8T-KbD">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Item-->
+        <scene sceneID="fuM-Fx-Rwp">
+            <objects>
+                <navigationController id="5Xr-dH-nM2" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="U0E-oC-Syg"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vrJ-iC-8r0">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="dV3-5q-YrE" kind="relationship" relationship="rootViewController" id="HBX-Td-GUd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ica-gP-gPy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-349" y="202"/>
+        </scene>
+        <!--Информация-->
+        <scene sceneID="Krz-El-1D6">
+            <objects>
+                <viewController storyboardIdentifier="InfoVC" id="dV3-5q-YrE" customClass="InfoViewController" customModule="MyHabits" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WfW-h7-2SI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Pqh-yB-7nc"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Информация" image="info.circle.fill" catalog="system" selectedImage="info.circle.fill" id="SHf-yZ-NkF">
+                        <color key="badgeColor" name="PurpleColorSet"/>
+                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="vd2-X4-L87"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wmj-5M-iYf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="512" y="202"/>
+        </scene>
+        <!--Привычки-->
+        <scene sceneID="zPT-mE-log">
+            <objects>
+                <viewController storyboardIdentifier="HabitsVC" id="AwW-Lr-hvS" customClass="HabitsViewController" customModule="MyHabits" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5FH-Ar-7rC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="tzf-Gw-GGI"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Привычки" image="rectangle.grid.1x2.fill" catalog="system" selectedImage="rectangle.grid.1x2.fill" id="8hq-se-ZbL">
+                        <color key="badgeColor" name="PurpleColorSet"/>
+                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="vdV-j3-0pN"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Fn-BB-r4G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="512" y="-468"/>
+        </scene>
+        <!--Habit View Controller-->
+        <scene sceneID="yBH-x3-LAa">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zdz-bt-BaS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="addHabitVC" id="x80-CH-8wM" customClass="HabitViewController" customModule="MyHabits" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MjJ-fa-UR9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="I6v-kp-7sV"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="zzK-SD-b9i"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1445" y="-468"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="DY8-Ud-hAG">
+            <objects>
+                <navigationController id="6yD-r7-T6A" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="JZd-WN-GWU"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="haV-v1-qJQ">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="AwW-Lr-hvS" kind="relationship" relationship="rootViewController" id="GpO-x6-bsd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="59P-bx-Uog" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-349" y="-468"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="08g-eY-dOC">
+            <objects>
+                <tabBarController id="hDM-8T-KbD" customClass="TabBarController" customModule="MyHabits" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Yv1-hI-OR4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="6yD-r7-T6A" kind="relationship" relationship="viewControllers" id="leV-5w-w3Q"/>
+                        <segue destination="5Xr-dH-nM2" kind="relationship" relationship="viewControllers" id="ekw-RM-MtN"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jNg-df-Qce" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1235" y="-177"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="info.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="rectangle.grid.1x2.fill" catalog="system" width="128" height="101"/>
+        <namedColor name="PurpleColorSet">
+            <color red="0.63137254901960782" green="0.086274509803921567" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
