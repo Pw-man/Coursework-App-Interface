@@ -68,10 +68,7 @@ class HabitViewController: UIViewController, UIColorPickerViewControllerDelegate
         return dp
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        view.backgroundColor = .white
+    func addSubviews() {
         view.addSubview(titleLabel)
         view.addSubview(titleTextField)
         view.addSubview(colorLabel)
@@ -79,6 +76,15 @@ class HabitViewController: UIViewController, UIColorPickerViewControllerDelegate
         view.addSubview(timeLabel)
         view.addSubview(timeEditableTextField)
         view.addSubview(datePicker)
+    }
+    
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        view.backgroundColor = .white
+        addSubviews()
  
         titleTextField.delegate = self
         

@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		302573E026933BE300566029 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302573DF26933BE300566029 /* Models.swift */; };
 		30287D83268F64310010C1A7 /* HabitsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30287D82268F64310010C1A7 /* HabitsCollectionViewCell.swift */; };
+		306345602694C3F3007F2205 /* HabitDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3063455F2694C3F3007F2205 /* HabitDetailsViewController.swift */; };
 		30B6F849269322A300E8CC8E /* ProgressCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B6F848269322A300E8CC8E /* ProgressCollectionViewCell.swift */; };
 		30CB3F03268CB2D4009FCC0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CB3F02268CB2D4009FCC0A /* AppDelegate.swift */; };
 		30CB3F05268CB2D4009FCC0A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CB3F04268CB2D4009FCC0A /* SceneDelegate.swift */; };
@@ -24,8 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		302573DF26933BE300566029 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		30287D82268F64310010C1A7 /* HabitsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsCollectionViewCell.swift; sourceTree = "<group>"; };
+		3063455F2694C3F3007F2205 /* HabitDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailsViewController.swift; sourceTree = "<group>"; };
 		30B6F848269322A300E8CC8E /* ProgressCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCollectionViewCell.swift; sourceTree = "<group>"; };
 		30CB3EFF268CB2D4009FCC0A /* MyHabits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyHabits.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30CB3F02268CB2D4009FCC0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +53,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		301643A52695C6550051CD4C /* CustomViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				30CB3F1D268CBCC6009FCC0A /* InfoViewController.swift */,
+				30CB3F1A268CBCBB009FCC0A /* HabitsViewController.swift */,
+				30CB3F3B268CD2AB009FCC0A /* HabitViewController.swift */,
+				3063455F2694C3F3007F2205 /* HabitDetailsViewController.swift */,
+			);
+			path = CustomViewControllers;
+			sourceTree = "<group>";
+		};
 		302573DE26933BAF00566029 /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -60,14 +71,6 @@
 				30287D82268F64310010C1A7 /* HabitsCollectionViewCell.swift */,
 			);
 			path = CollectionViewCells;
-			sourceTree = "<group>";
-		};
-		302573E226933BE700566029 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				302573DF26933BE300566029 /* Models.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		30CB3EF6268CB2D4009FCC0A = {
@@ -91,13 +94,10 @@
 			children = (
 				30CB3F02268CB2D4009FCC0A /* AppDelegate.swift */,
 				30CB3F04268CB2D4009FCC0A /* SceneDelegate.swift */,
-				30CB3F1D268CBCC6009FCC0A /* InfoViewController.swift */,
 				30CB3F38268CC483009FCC0A /* TabBarController.swift */,
-				30CB3F1A268CBCBB009FCC0A /* HabitsViewController.swift */,
-				30CB3F3B268CD2AB009FCC0A /* HabitViewController.swift */,
+				301643A52695C6550051CD4C /* CustomViewControllers */,
 				302573DE26933BAF00566029 /* CollectionViewCells */,
 				30CB3F17268CB3B1009FCC0A /* HabitsStore.swift */,
-				302573E226933BE700566029 /* Models */,
 				30CB3F06268CB2D4009FCC0A /* ViewController.swift */,
 				30CB3F08268CB2D4009FCC0A /* Main.storyboard */,
 				30CB3F0B268CB2DF009FCC0A /* Assets.xcassets */,
@@ -177,10 +177,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				302573E026933BE300566029 /* Models.swift in Sources */,
 				30CB3F18268CB3B1009FCC0A /* HabitsStore.swift in Sources */,
 				30CB3F07268CB2D4009FCC0A /* ViewController.swift in Sources */,
 				30CB3F03268CB2D4009FCC0A /* AppDelegate.swift in Sources */,
+				306345602694C3F3007F2205 /* HabitDetailsViewController.swift in Sources */,
 				30287D83268F64310010C1A7 /* HabitsCollectionViewCell.swift in Sources */,
 				30CB3F3C268CD2AB009FCC0A /* HabitViewController.swift in Sources */,
 				30CB3F1B268CBCBB009FCC0A /* HabitsViewController.swift in Sources */,

@@ -12,18 +12,17 @@ class HabitsViewController: UIViewController {
     
     private let myLayout = UICollectionViewFlowLayout()
     
-    private lazy var habitsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: myLayout)
+    lazy var habitsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: myLayout)
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(HabitsStore.shared.habits)
         view.addSubview(habitsCollectionView)
         habitsCollectionView.backgroundColor = UIColor(named: "GrayBackgroundColor")
         habitsCollectionView.turnOnAutoLayout()
         
         let constraints = [
-            habitsCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            habitsCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             habitsCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             habitsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             habitsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -38,8 +37,14 @@ class HabitsViewController: UIViewController {
         habitsCollectionView.delegate = self
         habitsCollectionView.register(HabitsCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: HabitsCollectionViewCell.self))
         habitsCollectionView.register(ProgressCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: ProgressCollectionViewCell.self))
+
     }
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        habitsCollectionView.reloadData()
+//    }
+
 
     @objc func tapToAdd() {
         let newHabitController = storyboard?.instantiateViewController(withIdentifier: "addHabitVC") as! HabitViewController
@@ -50,6 +55,7 @@ class HabitsViewController: UIViewController {
     }
 
 }
+//MARK: UICollectionViewDataSource
 
 extension HabitsViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -73,7 +79,16 @@ extension HabitsViewController: UICollectionViewDataSource {
             return cellTwo
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let habitDetailsVC = HabitDetailsViewController()
+        habitDetailsVC.selectedHabit = HabitsStore.shared.habits[indexPath.item]
+        if indexPath.section == 1 {
+            self.navigationController?.pushViewController(habitDetailsVC, animated: true)
+        }
+    }
 }
+//MARK: UICollectionViewDelegateFlowLayout
 
 extension HabitsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -96,7 +111,7 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout {
         if section == 0 {
             return UIEdgeInsets(top: 22, left: 16, bottom: 18, right: 16)
         } else {
-        return UIEdgeInsets(top: .zero, left: 16, bottom: .zero, right: 16)
+        return UIEdgeInsets(top: .zero, left: 16, bottom: 16, right: 16)
     }
 }
 }

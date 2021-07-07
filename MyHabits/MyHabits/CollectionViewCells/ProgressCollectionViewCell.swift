@@ -8,14 +8,12 @@
 import UIKit
 
 class ProgressCollectionViewCell: UICollectionViewCell {
-    
-    
-    
-    private var progressView: UIProgressView = {
+
+    var progressView: UIProgressView = {
         let pv = UIProgressView()
         pv.progressViewStyle = .default
         pv.progressTintColor = UIColor(named: "PurpleColorSet")
-        pv.setProgress(0.5, animated: true)
+        pv.progress = HabitsStore.shared.todayProgress
         pv.turnOnAutoLayout()
         return pv
     }()
@@ -45,6 +43,8 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(userSupportingTitle)
         contentView.addSubview(percentageLabel)
         contentView.backgroundColor = .white
+        contentView.layer.cornerRadius = 8
+        contentView.layer.masksToBounds = true
         
         let constraints = [
             userSupportingTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),

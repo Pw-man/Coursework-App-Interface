@@ -9,13 +9,14 @@ import UIKit
 
 class HabitsCollectionViewCell: UICollectionViewCell {
     
-    var habit: Habit? {
+        var habit: Habit? {
         didSet {
             guard let habit = habit else { return }
+            nameHabitLabel.text = habit.name
             nameHabitLabel.textColor = habit.color
             timeLabel.text = habit.dateString
             counterLabel.text = "Счётчик: \(habit.trackDates.count)"
-            roundMarkingView.layer.borderColor = habit.color.cgColor
+            roundMarkingButton.layer.borderColor = habit.color.cgColor
         }
     }
     
@@ -43,23 +44,30 @@ class HabitsCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private let roundMarkingView: UIView = {
-       let view = UIView()
-        view.layer.cornerRadius = 19
-        view.layer.borderWidth = 1
-        view.turnOnAutoLayout()
-        return view
+    lazy var roundMarkingButton: UIButton = {
+       let button = UIButton()
+        button.layer.cornerRadius = 19
+        button.layer.borderWidth = 1
+        button.turnOnAutoLayout()
+        return button
     }()
+    
+
+    
+    
         
     override init(frame: CGRect) {
         super.init(frame: frame)
+        roundMarkingButton.addTarget(self, action: #selector(tapOnCircle), for: .touchUpInside)
         
         contentView.addSubview(nameHabitLabel)
         contentView.addSubview(timeLabel)
         contentView.addSubview(counterLabel)
-        contentView.addSubview(roundMarkingView)
+        contentView.addSubview(roundMarkingButton)
         contentView.backgroundColor = .white
-        
+        contentView.layer.masksToBounds = true
+        contentView.layer.cornerRadius = 8
+                
         let constraints = [
             nameHabitLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             nameHabitLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
@@ -71,9 +79,11 @@ class HabitsCollectionViewCell: UICollectionViewCell {
             counterLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             counterLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
             
-            roundMarkingView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 46),
-            roundMarkingView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25),
-            roundMarkingView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -46)
+            roundMarkingButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 46),
+            roundMarkingButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25),
+            roundMarkingButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -46),
+            roundMarkingButton.widthAnchor.constraint(equalToConstant: 38),
+            roundMarkingButton.heightAnchor.constraint(equalToConstant: 38),
         ]
         NSLayoutConstraint.activate(constraints)
     }
@@ -82,4 +92,19 @@ class HabitsCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc func tapOnCircle() {
+        guard let habit = habit else { return }
+        roundMarkingButton.backgroundColor = habit.color
+        let config = UIImage.SymbolConfiguration(textStyle: .headline, scale: .default)
+        guard let checkmarkImage = UIImage(systemName: "checkmark", withConfiguration: config) else { return }
+        let finalCheckmark = checkmarkImage.withTintColor(.white, renderingMode: .alwaysOriginal)
+        roundMarkingButton.setImage(finalCheckmark, for: .normal)
+        let progressCVC = ProgressCollectionViewCell()
+        if habit.isAlreadyTakenToday {
+            roundMarkingButton.isUserInteractionEnabled = false
+        } else {
+            HabitsStore.shared.track(habit)
+            progressCVC.progressView.setProgress(progressCVC.progressView.progress + Float((1 / HabitsStore.shared.habits.count)), animated: true)
+        }
+    }
 }
