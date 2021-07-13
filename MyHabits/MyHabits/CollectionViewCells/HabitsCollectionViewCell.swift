@@ -9,30 +9,32 @@ import UIKit
 
 class HabitsCollectionViewCell: UICollectionViewCell {
     
-        var habit: Habit? {
-        didSet {
-            guard let habit = habit else { return }
-            nameHabitLabel.text = habit.name
-            nameHabitLabel.textColor = habit.color
-            timeLabel.text = habit.dateString
-            counterLabel.text = "Счётчик: \(habit.trackDates.count)"
-            roundMarkingButton.layer.borderColor = habit.color.cgColor
-        }
-    }
+    var buttonDelegate: HabitsViewController?
+    
+    var habit: Habit?
+    
+    func cellConfig() {
+                guard let habit = habit else { return }
+                nameHabitLabel.text = habit.name
+                nameHabitLabel.textColor = habit.color
+                timeLabel.text = habit.dateString
+                counterLabel.text = "Счётчик: \(habit.trackDates.count)"
+                roundMarkingButton.layer.borderColor = habit.color.cgColor
+            }
     
     private let nameHabitLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         label.turnOnAutoLayout()
-       return label
+        return label
     }()
     
     private let timeLabel: UILabel = {
-    let label = UILabel()
+        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         label.textColor = .systemGray2
         label.turnOnAutoLayout()
-       return label
+        return label
     }()
     
     private let counterLabel: UILabel = {
@@ -45,21 +47,16 @@ class HabitsCollectionViewCell: UICollectionViewCell {
     }()
     
     lazy var roundMarkingButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.layer.cornerRadius = 19
         button.layer.borderWidth = 1
         button.turnOnAutoLayout()
         return button
     }()
     
-
-    
-    
-        
     override init(frame: CGRect) {
         super.init(frame: frame)
-        roundMarkingButton.addTarget(self, action: #selector(tapOnCircle), for: .touchUpInside)
-        
+
         contentView.addSubview(nameHabitLabel)
         contentView.addSubview(timeLabel)
         contentView.addSubview(counterLabel)
@@ -67,7 +64,7 @@ class HabitsCollectionViewCell: UICollectionViewCell {
         contentView.backgroundColor = .white
         contentView.layer.masksToBounds = true
         contentView.layer.cornerRadius = 8
-                
+        
         let constraints = [
             nameHabitLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             nameHabitLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
@@ -94,17 +91,11 @@ class HabitsCollectionViewCell: UICollectionViewCell {
     
     @objc func tapOnCircle() {
         guard let habit = habit else { return }
-        roundMarkingButton.backgroundColor = habit.color
-        let config = UIImage.SymbolConfiguration(textStyle: .headline, scale: .default)
-        guard let checkmarkImage = UIImage(systemName: "checkmark", withConfiguration: config) else { return }
-        let finalCheckmark = checkmarkImage.withTintColor(.white, renderingMode: .alwaysOriginal)
-        roundMarkingButton.setImage(finalCheckmark, for: .normal)
-        let progressCVC = ProgressCollectionViewCell()
         if habit.isAlreadyTakenToday {
             roundMarkingButton.isUserInteractionEnabled = false
         } else {
             HabitsStore.shared.track(habit)
-            progressCVC.progressView.setProgress(progressCVC.progressView.progress + Float((1 / HabitsStore.shared.habits.count)), animated: true)
+            buttonDelegate?.habitsCollectionView.reloadData()
         }
     }
 }

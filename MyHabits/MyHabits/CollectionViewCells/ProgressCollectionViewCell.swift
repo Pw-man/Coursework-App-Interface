@@ -8,15 +8,8 @@
 import UIKit
 
 class ProgressCollectionViewCell: UICollectionViewCell {
-
-    var progressView: UIProgressView = {
-        let pv = UIProgressView()
-        pv.progressViewStyle = .default
-        pv.progressTintColor = UIColor(named: "PurpleColorSet")
-        pv.progress = HabitsStore.shared.todayProgress
-        pv.turnOnAutoLayout()
-        return pv
-    }()
+    
+    var progressView = UIProgressView()
     
     private let userSupportingTitle: UILabel = {
         let label = UILabel()
@@ -24,11 +17,11 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
         label.textColor = .systemGray
         label.turnOnAutoLayout()
-       return label
+        return label
     }()
     
-    private let percentageLabel: UILabel = {
-      let label = UILabel()
+    var percentageLabel: UILabel = {
+        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
         label.textColor = .systemGray
         label.turnOnAutoLayout()
@@ -37,7 +30,6 @@ class ProgressCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        percentageLabel.text = "\(self.progressView.progress * 100)%"
         
         contentView.addSubview(progressView)
         contentView.addSubview(userSupportingTitle)
@@ -45,6 +37,11 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         contentView.backgroundColor = .white
         contentView.layer.cornerRadius = 8
         contentView.layer.masksToBounds = true
+        
+        progressView.progressViewStyle = .default
+        progressView.progressTintColor = UIColor(named: "PurpleColorSet")
+        progressView.progress = HabitsStore.shared.todayProgress
+        progressView.turnOnAutoLayout()
         
         let constraints = [
             userSupportingTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
@@ -66,5 +63,4 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
 

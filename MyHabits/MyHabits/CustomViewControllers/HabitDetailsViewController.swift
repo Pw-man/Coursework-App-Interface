@@ -10,18 +10,18 @@ import UIKit
 class HabitDetailsViewController: UIViewController, UITableViewDelegate {
     
     var selectedHabit: Habit?
-
-    private let tableView = UITableView(frame: .zero, style: .grouped)
+    
+    let tableView = UITableView(frame: .zero, style: .grouped)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.turnOnAutoLayout()
         view.addSubview(tableView)
         view.backgroundColor = .white
-        navigationController?.navigationBar.prefersLargeTitles = false
         tableView.dataSource = self
         tableView.delegate = self
         navigationItem.title = selectedHabit?.name
+        navigationItem.largeTitleDisplayMode = .never
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Править", style: .plain, target: self, action: #selector(editButtonPressed))
         
         let constraints = [
@@ -31,24 +31,28 @@ class HabitDetailsViewController: UIViewController, UITableViewDelegate {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ]
         NSLayoutConstraint.activate(constraints)
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tableView.reloadData()
     }
     
     @objc func editButtonPressed() {
+        let habitEditVC = HabitEditViewController()
+        habitEditVC.titleTextField.text = selectedHabit?.name
+        habitEditVC.roundColorButton.backgroundColor = selectedHabit?.color
+        habitEditVC.roundColorButton.layer.borderColor = selectedHabit?.color.cgColor
+        habitEditVC.timeEditableTextField.text = selectedHabit?.dateString
+        habitEditVC.editingHabit = selectedHabit
+        habitEditVC.habitDetailsVC = self
+        let navHabitEdit = UINavigationController(rootViewController: habitEditVC)
+        navHabitEdit.modalPresentationStyle = .fullScreen
+        navigationController?.present(navHabitEdit, animated: true, completion: nil)
         
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Активность"
     }
-    
 }
 
+//MARK: - UITableViewDataSource
 extension HabitDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return HabitsStore.shared.dates.count
@@ -58,13 +62,25 @@ extension HabitDetailsViewController: UITableViewDataSource {
         let cell = UITableViewCell()
         cell.textLabel?.text = HabitsStore.shared.trackDateString(forIndex: indexPath.row)
         guard let selectedHabit = selectedHabit else { return UITableViewCell()}
-        if selectedHabit.isAlreadyTakenToday {
-            cell.tintColor = UIColor(named: "PurpleColorSet")
-            cell.accessoryType = .checkmark
+        cell.tintColor = UIColor(named: "PurpleColorSet")
+        for date in HabitsStore.shared.dates  {
+            for date1 in selectedHabit.trackDates {
+                if Calendar.current.isDate(date, equalTo: date1, toGranularity: .day) {
+                    cell.accessoryType = .checkmark
+                } else {
+                    cell.accessoryType = .none
+                }
+            }
         }
         return cell
     }
-    
-    
+}
+
+//MARK: - PopVCFunc
+
+extension HabitDetailsViewController {
+    func popVC() {
+        self.navigationController?.popViewController(animated: false)
+    }
 }
 

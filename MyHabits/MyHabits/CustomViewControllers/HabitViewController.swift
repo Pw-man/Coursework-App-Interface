@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HabitViewController: UIViewController, UIColorPickerViewControllerDelegate {
+class HabitViewController: UIViewController {
     
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -17,7 +17,7 @@ class HabitViewController: UIViewController, UIColorPickerViewControllerDelegate
         return label
     }()
     
-    let titleTextField: UITextField = {
+    var titleTextField: UITextField = {
         let textField = UITextField()
         textField.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         textField.placeholder = "Бегать по утрам, спать 8 часов и т.п."
@@ -51,7 +51,7 @@ class HabitViewController: UIViewController, UIColorPickerViewControllerDelegate
         label.turnOnAutoLayout()
         return label
     }()
-
+    
     let timeEditableTextField : UITextField = {
         let tetf = UITextField()
         tetf.isUserInteractionEnabled = false
@@ -78,14 +78,12 @@ class HabitViewController: UIViewController, UIColorPickerViewControllerDelegate
         view.addSubview(datePicker)
     }
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .white
         addSubviews()
- 
+        
         titleTextField.delegate = self
         
         navigationItem.title = "Создать"
@@ -126,8 +124,6 @@ class HabitViewController: UIViewController, UIColorPickerViewControllerDelegate
             datePicker.topAnchor.constraint(equalTo: timeEditableTextField.bottomAnchor, constant: 15),
             datePicker.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             datePicker.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-
-            
         ]
         NSLayoutConstraint.activate(constraints)
     }
@@ -138,15 +134,10 @@ class HabitViewController: UIViewController, UIColorPickerViewControllerDelegate
         present(colorPickerVC, animated: true, completion: nil)
     }
     
-    func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
-        let color = viewController.selectedColor
-        roundColorButton.backgroundColor = color
-    }
- 
     @objc func cancelButton() {
         self.dismiss(animated: true, completion: nil)
     }
-
+    
     @objc func saveButton() {
         let newHabit = Habit(name: titleTextField.text ?? "Nameless habit", date: datePicker.date, color: roundColorButton.backgroundColor!)
         let store = HabitsStore.shared
@@ -162,11 +153,12 @@ class HabitViewController: UIViewController, UIColorPickerViewControllerDelegate
     func getDateFromPicker() {
         let formatter = DateFormatter()
         formatter.dateFormat = "h:mm a"
-                let coloredTextFromFormatter : NSAttributedString = "Каждый день в \(formatter.string(from: datePicker.date))".attributedStringWithColor(["\(formatter.string(from: datePicker.date))"], color: UIColor(named: "PurpleColorSet")!)
+        let coloredTextFromFormatter : NSAttributedString = "Каждый день в \(formatter.string(from: datePicker.date))".attributedStringWithColor(["\(formatter.string(from: datePicker.date))"], color: UIColor(named: "PurpleColorSet")!)
         timeEditableTextField.attributedText = coloredTextFromFormatter
-        
     }
 }
+
+//MARK: - UITextFieldDelegate
 
 extension HabitViewController: UITextFieldDelegate {
     
@@ -176,6 +168,8 @@ extension HabitViewController: UITextFieldDelegate {
     }
 }
 
+//MARK: - extension String
+
 extension String {
     func attributedStringWithColor(_ strings: [String], color: UIColor, characterSpacing: UInt? = nil) -> NSAttributedString {
         let attributedString = NSMutableAttributedString(string: self)
@@ -183,11 +177,21 @@ extension String {
             let range = (self as NSString).range(of: string)
             attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
         }
-
+        
         guard let characterSpacing = characterSpacing else {return attributedString}
-
+        
         attributedString.addAttribute(NSAttributedString.Key.kern, value: characterSpacing, range: NSRange(location: 0, length: attributedString.length))
-
+        
         return attributedString
+    }
+}
+
+//MARK: - UIColorPickerViewControllerDelegate
+
+extension HabitViewController: UIColorPickerViewControllerDelegate {
+    
+    func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
+        let color = viewController.selectedColor
+        roundColorButton.backgroundColor = color
     }
 }

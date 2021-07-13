@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		30287D83268F64310010C1A7 /* HabitsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30287D82268F64310010C1A7 /* HabitsCollectionViewCell.swift */; };
+		3056D14F26973886006B3DFA /* HabitEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3056D14E26973886006B3DFA /* HabitEditViewController.swift */; };
 		306345602694C3F3007F2205 /* HabitDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3063455F2694C3F3007F2205 /* HabitDetailsViewController.swift */; };
 		30B6F849269322A300E8CC8E /* ProgressCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B6F848269322A300E8CC8E /* ProgressCollectionViewCell.swift */; };
 		30CB3F03268CB2D4009FCC0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CB3F02268CB2D4009FCC0A /* AppDelegate.swift */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		30287D82268F64310010C1A7 /* HabitsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsCollectionViewCell.swift; sourceTree = "<group>"; };
+		3056D14E26973886006B3DFA /* HabitEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitEditViewController.swift; sourceTree = "<group>"; };
 		3063455F2694C3F3007F2205 /* HabitDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailsViewController.swift; sourceTree = "<group>"; };
 		30B6F848269322A300E8CC8E /* ProgressCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCollectionViewCell.swift; sourceTree = "<group>"; };
 		30CB3EFF268CB2D4009FCC0A /* MyHabits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyHabits.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,6 +62,7 @@
 				30CB3F1A268CBCBB009FCC0A /* HabitsViewController.swift */,
 				30CB3F3B268CD2AB009FCC0A /* HabitViewController.swift */,
 				3063455F2694C3F3007F2205 /* HabitDetailsViewController.swift */,
+				3056D14E26973886006B3DFA /* HabitEditViewController.swift */,
 			);
 			path = CustomViewControllers;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 				30CB3F03268CB2D4009FCC0A /* AppDelegate.swift in Sources */,
 				306345602694C3F3007F2205 /* HabitDetailsViewController.swift in Sources */,
 				30287D83268F64310010C1A7 /* HabitsCollectionViewCell.swift in Sources */,
+				3056D14F26973886006B3DFA /* HabitEditViewController.swift in Sources */,
 				30CB3F3C268CD2AB009FCC0A /* HabitViewController.swift in Sources */,
 				30CB3F1B268CBCBB009FCC0A /* HabitsViewController.swift in Sources */,
 				30B6F849269322A300E8CC8E /* ProgressCollectionViewCell.swift in Sources */,
