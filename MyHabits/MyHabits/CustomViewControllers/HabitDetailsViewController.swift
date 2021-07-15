@@ -20,6 +20,7 @@ class HabitDetailsViewController: UIViewController, UITableViewDelegate {
         view.backgroundColor = .white
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
         navigationItem.title = selectedHabit?.name
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Править", style: .plain, target: self, action: #selector(editButtonPressed))
@@ -59,19 +60,15 @@ extension HabitDetailsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self), for: indexPath)
         cell.textLabel?.text = HabitsStore.shared.trackDateString(forIndex: indexPath.row)
         guard let selectedHabit = selectedHabit else { return UITableViewCell()}
-        cell.tintColor = UIColor(named: "PurpleColorSet")
-        for date in HabitsStore.shared.dates  {
-            for date1 in selectedHabit.trackDates {
-                if Calendar.current.isDate(date, equalTo: date1, toGranularity: .day) {
-                    cell.accessoryType = .checkmark
-                } else {
-                    cell.accessoryType = .none
-                }
-            }
+        if HabitsStore.shared.habit(selectedHabit, isTrackedIn: HabitsStore.shared.dates[indexPath.row]) {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
         }
+        cell.tintColor = UIColor(named: "PurpleColorSet")
         return cell
     }
 }
